@@ -30,7 +30,7 @@ class QuoteTableViewController: UITableViewController {
   
   
   
-  
+
   
     override func viewDidLoad() {
         super.viewDidLoad()
