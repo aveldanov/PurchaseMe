@@ -11,9 +11,6 @@ import StoreKit
 
 class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
   
-  
-  
-  
   let productID = "com.aveldanov.PurchaseMe.PremiumQuotes"
   
   var quotesToShow = [
