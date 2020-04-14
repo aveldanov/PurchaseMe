@@ -40,17 +40,33 @@ class QuoteTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return quotesToShow.count
+      return quotesToShow.count + 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath)
+      if indexPath.row < quotesToShow.count{
+        cell.textLabel?.text = quotesToShow[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+      }else{
+        cell.textLabel?.text = "Get More Quotes"
+        cell.textLabel?.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        cell.accessoryType = .disclosureIndicator
+        
+      }
 
-      cell.textLabel?.text = quotesToShow[indexPath.row]
-      cell.textLabel?.numberOfLines = 0
         return cell
     }
+  
+  
+  
+  //MARK: - TableView Delegate Method
+  
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    <#code#>
+  }
     
 
     /*
