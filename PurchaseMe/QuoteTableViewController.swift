@@ -65,7 +65,11 @@ class QuoteTableViewController: UITableViewController {
   
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    <#code#>
+    if indexPath.row == quotesToShow.count{
+buyPremiumQuotes()
+    }
+    
+    tableView.deselectRow(at: indexPath, animated: true)
   }
     
 
@@ -114,7 +118,12 @@ class QuoteTableViewController: UITableViewController {
     }
     */
   
+  //MARK: - In-App Purchase Method
   
+  func buyPremiumQuotes(){
+    
+    
+  }
   
   @IBAction func restorePressed(_ sender: UIBarButtonItem) {
   }
