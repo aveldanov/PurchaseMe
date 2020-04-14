@@ -55,6 +55,8 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
       if indexPath.row < quotesToShow.count{
         cell.textLabel?.text = quotesToShow[indexPath.row]
         cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.textColor = .black
+        cell.accessoryType = .none
       }else{
         cell.textLabel?.text = "Get More Quotes"
         cell.textLabel?.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
@@ -133,15 +135,42 @@ buyPremiumQuotes()
       paymentRequest.productIdentifier = productID
       SKPaymentQueue.default().add(paymentRequest)
       // verify payment went through
-      
-      
     }else{
       print("User can't make payments")    }
   }
   
   func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-     <#code#>
+    for transaction in transactions{
+      if transaction.transactionState == .purchased{
+        // User payment successful
+                print("Transaction Success")
+        
+        showPremiumQuotes()
+        UserDefaults.standard.set(true, forKey: productID)
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
+      }else if transaction.transactionState == .failed{
+        // Payment Failed
+        
+        if let error = transaction.error{
+          let errorDescription = error.localizedDescription
+          print("Transaction Failed due to error: \(errorDescription)")
+
+          
+        }
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
+
+      }
+    }
    }
+  
+  
+  func showPremiumQuotes(){
+    
+    quotesToShow.append(contentsOf: premiumQuotes)
+    tableView.reloadData()
+  }
   
   
   //MARK: - UI
