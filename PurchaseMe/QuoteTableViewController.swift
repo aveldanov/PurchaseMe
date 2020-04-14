@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import StoreKit
 
-class QuoteTableViewController: UITableViewController {
+class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
+ 
+  
 
+  
+  let productID = "com.aveldanov.PurchaseMe.PremiumQuotes"
+  
   var quotesToShow = [
         "Our greatest glory is not in never falling, but in rising every time we fall. — Confucius",
         "All our dreams can come true, if we have the courage to pursue them. – Walt Disney",
@@ -34,7 +40,7 @@ class QuoteTableViewController: UITableViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      SKPaymentQueue.default().add(self)
     }
 
     // MARK: - Table view data source
@@ -118,12 +124,27 @@ buyPremiumQuotes()
     }
     */
   
-  //MARK: - In-App Purchase Method
+  //MARK: - In-App Purchase Methods
   
   func buyPremiumQuotes(){
-    
-    
+    // check if you user can buy
+    if SKPaymentQueue.canMakePayments(){
+      let paymentRequest = SKMutablePayment()
+      paymentRequest.productIdentifier = productID
+      SKPaymentQueue.default().add(paymentRequest)
+      // verify payment went through
+      
+      
+    }else{
+      print("User can't make payments")    }
   }
+  
+  func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+     <#code#>
+   }
+  
+  
+  //MARK: - UI
   
   @IBAction func restorePressed(_ sender: UIBarButtonItem) {
   }
