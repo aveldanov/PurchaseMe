@@ -70,7 +70,6 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
       cell.textLabel?.text = "Get More Quotes"
       cell.textLabel?.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
       cell.accessoryType = .disclosureIndicator
-      
     }
     
     return cell
